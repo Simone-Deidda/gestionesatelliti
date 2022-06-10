@@ -1,4 +1,6 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="it" class="h-100" >
@@ -7,7 +9,7 @@
 	 	<!-- Common imports in pages -->
 	 	<jsp:include page="../header.jsp" />
 	 	
-	   <title>Visualizza Elemento</title>
+	   <title>Elimina Elemento</title>
 	   
 	 </head>
 	   <body class="d-flex flex-column h-100">
@@ -22,52 +24,54 @@
 			  
 			  		<div class='card'>
 					    <div class='card-header'>
-					        <h5>Visualizza dettaglio</h5>
+					        <h5>Conferma Rimozione</h5>
 					    </div>
 					    
 					
 					    <div class='card-body'>
 					    	<dl class="row">
 							  <dt class="col-sm-3 text-right">Id:</dt>
-							  <dd class="col-sm-9">${show_satellite_attr.id}</dd>
+							  <dd class="col-sm-9">${delete_satellite_attr.id}</dd>
 					    	</dl>
 					    	
 					    	<dl class="row">
 							  <dt class="col-sm-3 text-right">Denominazione:</dt>
-							  <dd class="col-sm-9">${show_satellite_attr.denominazione}</dd>
+							  <dd class="col-sm-9">${delete_satellite_attr.denominazione}</dd>
 					    	</dl>
 					    	
 					    	<dl class="row">
 							  <dt class="col-sm-3 text-right">Codice:</dt>
-							  <dd class="col-sm-9">${show_satellite_attr.codice}</dd>
+							  <dd class="col-sm-9">${delete_satellite_attr.codice}</dd>
 					    	</dl>
 					    	
-					    	<c:if test="${show_satellite_attr.dataLancio != null}">
+					    	<c:if test="${delete_satellite_attr.dataLancio != null}">
 						    	<dl class="row">
 								  <dt class="col-sm-3 text-right">Data di Lancio:</dt>
-								  <dd class="col-sm-9"><fmt:formatDate type="date" value = "${show_satellite_attr.dataLancio}" /></dd>
+								  <dd class="col-sm-9"><fmt:formatDate type="date" value = "${delete_satellite_attr.dataLancio}" /></dd>
 						    	</dl>
 					    	</c:if>
 					    	
-					    	<c:if test="${show_satellite_attr.dataRientro != null}">
+					    	<c:if test="${delete_satellite_attr.dataRientro != null}">
 						    	<dl class="row">
 								  <dt class="col-sm-3 text-right">Data di Rientro:</dt>
-								  <dd class="col-sm-9"><fmt:formatDate type="date" value = "${show_satellite_attr.dataRientro}" /></dd>
+								  <dd class="col-sm-9"><fmt:formatDate type="date" value = "${delete_satellite_attr.dataRientro}" /></dd>
 						    	</dl>
 					    	</c:if>
 					    	
-					    	<c:if test="${show_satellite_attr.stato != null}">
+					    	<c:if test="${delete_satellite_attr.stato != null}">
 						    	<dl class="row">
 								  <dt class="col-sm-3 text-right">Stato :</dt>
-								  <dd class="col-sm-9">${show_satellite_attr.stato}</dd>
+								  <dd class="col-sm-9">${delete_satellite_attr.stato}</dd>
 						    	</dl>
 					    	</c:if>
-					    	
 					    	
 					    </div>
 					    <!-- end card body -->
 					    
 					    <div class='card-footer'>
+					    <a href="${pageContext.request.contextPath}/satellite/remove/${delete_satellite_attr.id}" class='btn btn-outline-danger' style='width:80px'>
+					            <i class='fa fa-chevron-left'></i> Delete
+					        </a>
 					        <a href="${pageContext.request.contextPath}/satellite" class='btn btn-outline-secondary' style='width:80px'>
 					            <i class='fa fa-chevron-left'></i> Back
 					        </a>

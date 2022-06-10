@@ -95,4 +95,23 @@ public class SatelliteController {
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/satellite";
 	}
+	
+	@GetMapping("/delete/{idSatellite}")
+	public String delete(@PathVariable(required = true) Long idSatellite, Model model) {
+		model.addAttribute("delete_satellite_attr", satelliteService.caricaSingoloElemento(idSatellite));
+		return "satellite/delete";
+	}
+	
+	@GetMapping("/remove/{idSatellite}")
+	public String remove(@PathVariable(required = true) Long idSatellite, RedirectAttributes redirectAttrs) {
+		if (satelliteValidator.isValidForDelete(satelliteService.caricaSingoloElemento(idSatellite))) {
+			satelliteService.rimuovi(idSatellite);
+			redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+		}
+		else {
+			redirectAttrs.addFlashAttribute("failedMessage", "Impossibile eliminare il satellite selezionato");
+		}
+		
+		return "redirect:/satellite";
+	}
 }
