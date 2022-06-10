@@ -61,10 +61,10 @@ public class SatelliteServiceImpl implements SatelliteService {
 				predicates.add(cb.equal(root.get("stato"), example.getStato()));
 
 			if (example.getDataLancio() != null)
-				predicates.add(cb.greaterThanOrEqualTo(root.get("dataDiLancio"), example.getDataLancio()));
+				predicates.add(cb.greaterThanOrEqualTo(root.get("dataLancio"), example.getDataLancio()));
 
 			if (example.getDataRientro() != null)
-				predicates.add(cb.greaterThanOrEqualTo(root.get("dataDiRientro"), example.getDataRientro()));
+				predicates.add(cb.greaterThanOrEqualTo(root.get("dataRientro"), example.getDataRientro()));
 
 			return cb.and(predicates.toArray(new Predicate[predicates.size()]));
 		};
