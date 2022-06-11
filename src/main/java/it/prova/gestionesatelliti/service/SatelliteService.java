@@ -16,4 +16,6 @@ public interface SatelliteService {
 	public List<Satellite> findByExample(Satellite example);
 
 	public void rimuovi(Long idImpiegato);
+
+	public List<Satellite> listAllSatellitiOlderThan2();
 }

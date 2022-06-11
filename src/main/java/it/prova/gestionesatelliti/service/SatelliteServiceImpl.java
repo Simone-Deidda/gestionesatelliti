@@ -1,6 +1,8 @@
 package it.prova.gestionesatelliti.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.criteria.Predicate;
@@ -12,6 +14,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import it.prova.gestionesatelliti.model.Satellite;
+import it.prova.gestionesatelliti.model.StatoSatellite;
 import it.prova.gestionesatelliti.repository.SatelliteRepository;
 
 @Service
@@ -76,6 +79,17 @@ public class SatelliteServiceImpl implements SatelliteService {
 	@Transactional
 	public void rimuovi(Long idImpiegato) {
 		satelliteRepository.deleteById(idImpiegato);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Satellite> listAllSatellitiOlderThan2() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.YEAR, -2);
+		Date date = calendar.getTime();
+		System.out.println(date);
+		
+		return satelliteRepository.findAllByDataLancioBeforeAndStatoNot(calendar.getTime(), StatoSatellite.DISATTIVATO);
 	}
 
 }

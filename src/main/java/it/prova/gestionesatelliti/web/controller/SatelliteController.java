@@ -125,6 +125,7 @@ public class SatelliteController {
 		satelliteDaLanciare.setStato(StatoSatellite.IN_MOVIMENTO);
 		satelliteService.aggiorna(satelliteDaLanciare);
 		
+		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/satellite";
 	}
 	
@@ -136,6 +137,17 @@ public class SatelliteController {
 		satelliteDaLanciare.setStato(StatoSatellite.DISATTIVATO);
 		satelliteService.aggiorna(satelliteDaLanciare);
 		
+		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/satellite";
+	}
+	
+	@GetMapping("/searchTwoYearsOld")
+	public ModelAndView trovaSatellitiLanciatiDaOltre2Anni(RedirectAttributes redirectAttrs) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("Servlet");
+		List<Satellite> results = satelliteService.listAllSatellitiOlderThan2();
+		mv.addObject("satellite_list_attribute", results);
+		mv.setViewName("satellite/list");
+		return mv;
 	}
 }
