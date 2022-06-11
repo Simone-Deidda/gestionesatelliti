@@ -2,7 +2,6 @@ package it.prova.gestionesatelliti.service;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.criteria.Predicate;
@@ -86,10 +85,23 @@ public class SatelliteServiceImpl implements SatelliteService {
 	public List<Satellite> listAllSatellitiOlderThan2() {
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(Calendar.YEAR, -2);
-		Date date = calendar.getTime();
-		System.out.println(date);
 		
 		return satelliteRepository.findAllByDataLancioBeforeAndStatoNot(calendar.getTime(), StatoSatellite.DISATTIVATO);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Satellite> listAllSatellitiNotActiveAndNotBack() {
+		return satelliteRepository.findAllByStatoAndDataRientroIsNull(StatoSatellite.DISATTIVATO);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Satellite> listAllSatellitiOlderThan10() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.YEAR, -10);
+		
+		return satelliteRepository.findAllByDataLancioBeforeAndStato(calendar.getTime(), StatoSatellite.FISSO);
 	}
 
 }

@@ -18,4 +18,8 @@ public interface SatelliteService {
 	public void rimuovi(Long idImpiegato);
 
 	public List<Satellite> listAllSatellitiOlderThan2();
+
+	public List<Satellite> listAllSatellitiNotActiveAndNotBack();
+
+	public List<Satellite> listAllSatellitiOlderThan10();
 }

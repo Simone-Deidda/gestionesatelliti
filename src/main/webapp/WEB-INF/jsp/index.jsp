@@ -54,9 +54,9 @@
 				        <p class="col-md-8 fs-4">Trova Satelliti lanciati da più di due anni. </p>
 				        <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/satellite/searchTwoYearsOld">Cerca</a>
 				        <p class="col-md-8 fs-4">Trova Satelliti disattivati ma non rientrati. </p>
-				        <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/#">Cerca</a>
+				        <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/satellite/searchNotActive">Cerca</a>
 				        <p class="col-md-8 fs-4">Trova Satelliti rimasti in orbita 10 anni e che ora sono fissi. </p>
-				        <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/#">Cerca</a>
+				        <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/satellite/searchTenYearsOld">Cerca</a>
 				      </div>
 			    </div>
 			    

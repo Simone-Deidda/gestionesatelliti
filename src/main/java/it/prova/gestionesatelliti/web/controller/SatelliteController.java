@@ -144,8 +144,25 @@ public class SatelliteController {
 	@GetMapping("/searchTwoYearsOld")
 	public ModelAndView trovaSatellitiLanciatiDaOltre2Anni(RedirectAttributes redirectAttrs) {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("Servlet");
 		List<Satellite> results = satelliteService.listAllSatellitiOlderThan2();
+		mv.addObject("satellite_list_attribute", results);
+		mv.setViewName("satellite/list");
+		return mv;
+	}
+	
+	@GetMapping("/searchTenYearsOld")
+	public ModelAndView trovaSatellitiLanciatiDaOltre10AnniEFissi(RedirectAttributes redirectAttrs) {
+		ModelAndView mv = new ModelAndView();
+		List<Satellite> results = satelliteService.listAllSatellitiOlderThan10();
+		mv.addObject("satellite_list_attribute", results);
+		mv.setViewName("satellite/list");
+		return mv;
+	}
+	
+	@GetMapping("/searchNotActive")
+	public ModelAndView trovaSatellitiDiasttivatiMaNonRientrati(RedirectAttributes redirectAttrs) {
+		ModelAndView mv = new ModelAndView();
+		List<Satellite> results = satelliteService.listAllSatellitiNotActiveAndNotBack();
 		mv.addObject("satellite_list_attribute", results);
 		mv.setViewName("satellite/list");
 		return mv;
