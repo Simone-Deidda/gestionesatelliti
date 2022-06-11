@@ -1,5 +1,6 @@
 package it.prova.gestionesatelliti.web.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.prova.gestionesatelliti.model.Satellite;
 import it.prova.gestionesatelliti.model.SatelliteValidator;
+import it.prova.gestionesatelliti.model.StatoSatellite;
 import it.prova.gestionesatelliti.service.SatelliteService;
 
 @Controller
@@ -111,6 +113,28 @@ public class SatelliteController {
 		else {
 			redirectAttrs.addFlashAttribute("failedMessage", "Impossibile eliminare il satellite selezionato");
 		}
+		
+		return "redirect:/satellite";
+	}
+	
+	@GetMapping("/lancia/{idSatellite}")
+	public String lancia(@PathVariable(required = true) Long idSatellite, RedirectAttributes redirectAttrs) {
+		
+		Satellite satelliteDaLanciare = satelliteService.caricaSingoloElemento(idSatellite);
+		satelliteDaLanciare.setDataLancio(new Date());
+		satelliteDaLanciare.setStato(StatoSatellite.IN_MOVIMENTO);
+		satelliteService.aggiorna(satelliteDaLanciare);
+		
+		return "redirect:/satellite";
+	}
+	
+	@GetMapping("/rientra/{idSatellite}")
+	public String rientra(@PathVariable(required = true) Long idSatellite, RedirectAttributes redirectAttrs) {
+		
+		Satellite satelliteDaLanciare = satelliteService.caricaSingoloElemento(idSatellite);
+		satelliteDaLanciare.setDataRientro(new Date());
+		satelliteDaLanciare.setStato(StatoSatellite.DISATTIVATO);
+		satelliteService.aggiorna(satelliteDaLanciare);
 		
 		return "redirect:/satellite";
 	}
